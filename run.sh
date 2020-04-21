@@ -24,4 +24,4 @@ TERM=xterm-256color chroot "$chroot_dir" "/bin/$shell" "$@"
 PS1=$oldPS1
 PATH=$oldPATH
 
-umount "$chroot_dir/dev" "$chroot_dir/proc" "$chroot_dir/sys"
+umount "$chroot_dir/dev" "$chroot_dir/proc" "$chroot_dir/sys" "$chroot_dir/tmp"
