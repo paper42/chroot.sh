@@ -7,6 +7,7 @@ cd "$(dirname "$0")" || exit 1
 oldPS1=$PS1
 oldPATH=$PATH
 chroot_dir='root'
+cp /etc/resolv.conf "$chroot_dir/etc/"
 mount -t proc none "$chroot_dir/proc"
 mount -o bind /sys "$chroot_dir/sys"
 mount -o bind /dev "$chroot_dir/dev"
