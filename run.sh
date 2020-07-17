@@ -13,7 +13,7 @@ mount -o bind /sys "$chroot_dir/sys"
 mount -o bind /dev "$chroot_dir/dev"
 mount -t tmpfs -o size=1G tmpfs "$chroot_dir/tmp"
 
-PATH='/bin:/sbin:/usr/bin:/usr/sbin'
+PATH='/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin'
 PS1='$(pwd): '
 shell=
 for s in bash mksh ash sh; do
