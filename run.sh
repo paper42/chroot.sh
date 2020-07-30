@@ -21,7 +21,6 @@ mount -o bind /dev "$chroot_dir/dev"
 mount -t tmpfs -o size=1G tmpfs "$chroot_dir/tmp"
 
 PATH='/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin'
-PS1='$(pwd): '
 shell=
 for s in zsh fish bash loksh ksh mksh ash sh; do
 	if [ -e "$chroot_dir/bin/$s" ]; then
@@ -29,8 +28,7 @@ for s in zsh fish bash loksh ksh mksh ash sh; do
 		break
 	fi
 done
-TERM=xterm-256color chroot "$chroot_dir" "/bin/$shell" $@
-PS1=$oldPS1
+PS1='$(pwd): ' TERM=xterm-256color chroot "$chroot_dir" "/bin/$shell" $@
 PATH=$oldPATH
 
 umount "$chroot_dir/dev" "$chroot_dir/proc" "$chroot_dir/sys" "$chroot_dir/tmp"
