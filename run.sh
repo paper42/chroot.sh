@@ -23,7 +23,7 @@ mount -t tmpfs -o size=1G tmpfs "$chroot_dir/tmp"
 PATH='/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin'
 shell=
 for s in zsh fish bash loksh ksh mksh ash sh; do
-	if [ -e "$chroot_dir/bin/$s" ]; then
+	if [ -f "$chroot_dir/bin/$s" ] || [ -L "$chroot_dir/bin/$s" ]; then
 		shell="$s"
 		break
 	fi
