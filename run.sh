@@ -28,7 +28,11 @@ for s in zsh fish bash loksh ksh mksh ash sh; do
 		break
 	fi
 done
-PS1='$(pwd): ' TERM=xterm-256color chroot "$chroot_dir" "/bin/$shell" $@
+
+PS1='\w: '
+[ "$shell" = "zsh" ] && PS1='%~: '
+PS1="$PS1" TERM=xterm-256color chroot "$chroot_dir" "/bin/$shell" $@
 PATH=$oldPATH
+PS1="$oldPS1"
 
 umount "$chroot_dir/dev" "$chroot_dir/proc" "$chroot_dir/sys" "$chroot_dir/tmp"
