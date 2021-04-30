@@ -3,22 +3,28 @@
 # 1. create directory root/ with rootfs
 # 2. ./run.sh
 #
-# any argument to run.sh will be passed to the shell interpreter
-# example: ./run.sh -c ls
+# any argument to run.sh will be ran inside the chroot
+# example: ./run.sh ls -la
 SUDO=sudo
 if command -v doas >/dev/null; then
     SUDO=doas
 fi
 
 if ! [ "$(id -u)" -eq 0 ]; then
-	$SUDO sh "$0" "$@"
-	exit 0
+	exec $SUDO sh "$0" "$@"
 fi
-cmd="$*"
+
 cd "$(dirname "$0")" || exit 1
+chroot_dir='root'
+if ! [ -d "$chroot_dir" ]; then
+    echo "chroot directory $chroot_dir does not exist"
+    exit 1
+fi
+
+cmd="$*"
+
 oldPS1=$PS1
 oldPATH=$PATH
-chroot_dir='root'
 cp /etc/resolv.conf "$chroot_dir/etc/"
 mount -t proc none "$chroot_dir/proc"
 mount -o bind /sys "$chroot_dir/sys"
