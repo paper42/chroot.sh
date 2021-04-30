@@ -14,7 +14,6 @@ if ! [ "$(id -u)" -eq 0 ]; then
 	exec $SUDO sh "$0" "$@"
 fi
 
-cd "$(dirname "$0")" || exit 1
 chroot_dir='root'
 if ! [ -d "$chroot_dir" ]; then
     echo "chroot directory $chroot_dir does not exist"
