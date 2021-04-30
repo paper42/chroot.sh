@@ -48,4 +48,5 @@ PS1="$PS1" TERM=xterm-256color chroot "$chroot_dir" $cmd
 PATH=$oldPATH
 PS1="$oldPS1"
 
+sleep .1
 umount "$chroot_dir/dev" "$chroot_dir/proc" "$chroot_dir/sys" "$chroot_dir/tmp"
